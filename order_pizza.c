@@ -8,17 +8,18 @@ int main(int argc, char *argv[])
 	int count = 0;
 	char ch;
 
-	while ((ch=getopt(argc, argv, "d")) != EOF)
+	while ((ch=getopt(argc, argv, "d:t")) != EOF)
 		switch (ch) {
 		case 'd':
-		=;
-		break;
+			delivery = optarg;
+			break;
 		case 't':
-		=;
+			thick = 1;
+			break;
 		default:
-		fprint(stderr, "Unknown option: '%s'\n", optarg);
+			fprintf(stderr, "Unknown option: '%s'\n", optarg);
 		
-		return ;
+		return 1 ;
 		}
 
 
@@ -28,11 +29,11 @@ int main(int argc, char *argv[])
 	if (thick)
 		puts("Thick crust.");
 	if (delivery[0])
-		printf("To be delivered %s.\n, delivery");
+		printf("To be delivered %s.\n", delivery);
 
 	puts("Ingredients:");
 
-	for(count = ; count < ; count++)
+	for(count = 0; count < argc; count++)
 		puts(argv[count]);
 	return 0;
 }
