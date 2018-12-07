@@ -1,10 +1,24 @@
 #include <stdio.h>
+#include "totaller.h"
 
+//Moved this declarations into totaller.h
+
+/*
 float total = 0.0;
 short count = 0;
 
-/* This 6%. Which is a lot less than my agent takes... */
+//This is 6%. Which is a lot less than my agent takes...
 short tax_percent = 6; 
+*/
+
+float add_with_tax(float f)
+{
+	float tax_rate = 1 + tax_percent / 100.0;
+	//And what about the tip? Voice lessons ain't free
+	total = total + (f * tax_rate);
+	count = count + 1;
+	return total;
+}
 
 int main()
 {
@@ -20,11 +34,3 @@ int main()
 	return 0;
 }
 
-float add_with_tax(float f)
-{
-	float tax_rate = 1 + tax_percent / 100.0;
-	/* And what about the tip? Voice lessons ain't free */
-	total = total + (f * tax_rate);
-	count = count + 1;
-	return total;
-}
