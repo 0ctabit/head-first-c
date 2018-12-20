@@ -1,3 +1,4 @@
 !.gitignore 
 Chapter*/*
-!Chaper*/*.c
+!Chapter*/*.c
+!Chapter*/*.h
