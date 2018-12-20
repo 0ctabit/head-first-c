@@ -1,5 +1,4 @@
-*
-*/*_bin*
-!.gitignore 
-!*.c*
-!*.h*
+*/*
+!*/*.c
+!*/*.h
+!.gitignore
