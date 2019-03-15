@@ -1,8 +1,3 @@
-/* enable strdup() declaration in string.h */
-/*#if defined(__linux__) || defined(__linux) || defined(__gnu_linux__)
- / #define _BSD_SOURCE 1
-/#endif*/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,30 +8,6 @@ typedef struct island {
   char *closes;
   struct island *next;
 } island;
-
-void display(island *start);
-island* create(char *name);
-void release(island *i);
-
-int main()
-{
-  island *start   = NULL;
-  island *current = NULL;
-  island *next    = NULL;
-  char name[80];
-
-  for(; fgets(name, 80, stdin) != NULL; current = next) {
-    next = create(name);
-    if (start == NULL)
-      start = next;
-    if (current != NULL)
-      current->next = next;
-  }
-
-  display(start);
-  release(start);
-  return 0;
-}
 
 island* create(char *name)
 {
@@ -50,6 +21,38 @@ island* create(char *name)
   return i;
 }
 
+void display(island *start)
+{
+  island *i = start;
+  for (;i != NULL; i = i->next) {
+    printf("Name: %s open: %s-%s\n", i->name, i->opens, i->closes);
+  }
+}
+
+void display(island *start);
+island* create(char *name);
+void release(island *i);
+
+int main()
+{
+  island *start   = NULL;
+  island *i = NULL;
+  island *next    = NULL;
+  char name[80];
+
+  for(; fgets(name, 80, stdin) != NULL; i = next) {
+    next = create(name);
+    if (start == NULL)
+      start = next;
+    if (i != NULL)
+      i->next = next;
+  }
+
+  display(start);
+  release(start);
+  return 0;
+}
+
 void release(island *i)
 {
   island *next = NULL;
@@ -58,13 +61,6 @@ void release(island *i)
     free(i->name);
     free(i);
     i = next;
-  }
-}
-void display(island *start)
-{
-  island *i = start;
-  for (;i != NULL; i = i->next) {
-    printf("Name: %s open: %s-%s\n", i->name, i->opens, i->closes);
   }
 }
 
