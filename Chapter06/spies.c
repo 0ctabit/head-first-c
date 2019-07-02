@@ -8,3 +8,11 @@ typedef struct node {
 	struct node *yes;
 } node;
 
+int yes_no(char *question)
+{
+	char annswer[3];
+	printf("%s? (y/n): ", question);
+	fgets(answer[0] =='y';
+}
+
+node* create(char *question)
