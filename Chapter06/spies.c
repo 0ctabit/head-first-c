@@ -12,14 +12,15 @@ int yes_no(char *question)
 {
 	char annswer[3];
 	printf("%s? (y/n): ", question);
-	fgets(answer[0] =='y';
+	fgets(answer, 3, stdin);
+	return answer[0] =='y';
 }
 
 node* create(char *question)
 {
 	node *n = malloc(sizeof(node));
 	n->question = strdup(question);
-	n->no=NULL;
+	n->no = NULL;
 	n->yes = NULL;
 	return n;
 }
@@ -57,10 +58,27 @@ int main ()
 					break;
 				}
 			}else if (current->no) {
-				current = current->yes;
-			}else
+				current = current->no;
+			}else {
+				/* Make the yes-node the new suspect name */
+				printf("Who's the suspect?");
+				fgets(suspect, 20, stdin);
+				node *yes_node = create(suspect);
+				current->yes = yes_node;
+
+				/*Make the no-node a copy of this question*/
+				node *no_node = create(current->question);
+				current->no = no_node;
+				
+				/*Then replace this question with the new question*/
+				printf("Give me a question that TRUE for %s but not for %s?", suspect, current->question);
+				fgets(question, 80, stdin);
+				current->questio = strdup(question);
+
+				break;
 		}
 	}
-
-}
+}while(yes_no("Run again")); 
+release(start_node);
+return 0;
 
